@@ -1,0 +1,16 @@
+-
+  name: 'condition practice'
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: test playbook
+    debug:
+      msg: distribustion version is {{ ansible_distribution }}
+    when: ansible_distribution == "Ubuntu"  or ansible_distribution_version == "18.0"
+  - name: run ls command
+    shell:
+      date
+    register:  result
+  - name: result output
+    debug:
+      msg: "{{ result.stdout }}"

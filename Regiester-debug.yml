@@ -1,0 +1,16 @@
+-
+  name: "register practice"
+  hosts: all
+  gather_facts: true
+  tasks: 
+    - name: "uptime data"
+      shell:
+        "date +%d"
+      register: output_uptime
+    - name: "Register the value and show in debug"
+      shell:
+        "date +%B"
+      register: output
+    - debug:
+        msg: "output agaya {{ output.stdout }}  {{ output_uptime.stdout }}"
+      when: output.stdout == "January" or output_uptime.stdout == "2"
